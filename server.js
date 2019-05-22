@@ -16,6 +16,11 @@ const PORT = 3000;
 //set up db
 const db = require("./models");
 
+//set up handlebars
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 
 app.use(logger("dev"));
 // Parse request body as JSON
@@ -40,7 +45,7 @@ app.get("/scrape", (req, res) => {
             const result = {};
             result.title = $(element).children().text();
             result.summary = $(element).next().text();
-            result.href = $(element).children().attr("href");
+            result.href = "https://www.nytimes.com/" + $(element).children().attr("href");
             result.imgSrc = $(element).parent().prev().find("img").attr("src");
 
             db.Article.create(result)
@@ -48,18 +53,18 @@ app.get("/scrape", (req, res) => {
                 .catch(err => console.log(err));
         });
     })
-    // .then((req, res) => {
-    //     db.Article.find({})
-    //         .then(dbArticle => res.json(dbArticle))
-    //         .catch(err => res.json(err));
-    // });
-    // res.send("scrape complete");
+
 
 });
 
 app.get("/articles", (req, res) => {
         db.Article.find({})
-            .then(dbArticle => res.json(dbArticle))
+            .then(data => {
+                const hbarsObj = {
+                    article: data
+                }
+                res.render("index",hbarsObj);
+            })
             .catch(err => res.json(err));
 });
 // Start the server
