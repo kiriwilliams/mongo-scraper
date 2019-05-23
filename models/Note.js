@@ -5,8 +5,9 @@ var Schema = mongoose.Schema;
 
 //make new schema for a NoteSchema object
 var NoteSchema = new Schema({
-    title: String,
-    body: String
+    note: {
+        type: String
+    }
 });
 
 //make model using schema
