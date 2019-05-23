@@ -21,6 +21,10 @@ var ArticleSchema = new Schema({
   },
   imgSrc: {
       type: String
+  },
+  note: {
+    type: Schema.Types.ObjectId,
+    ref: "Note"
   }
 });
 
