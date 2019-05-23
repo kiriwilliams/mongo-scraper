@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 
 //set up server
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 //set up db
 const db = require("./models");
