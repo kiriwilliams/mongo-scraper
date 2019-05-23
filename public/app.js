@@ -2,11 +2,6 @@
 console.log("running app.js");
 
 
-$.getJSON("/articles", function(data) {
-  for (var i = 0; i < data.length; i++) {
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].summary + "</p>");
-  }
-});
 
 
 // Whenever someone clicks a p tag

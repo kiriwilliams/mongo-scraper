@@ -36,8 +36,7 @@ mongoose.connect(MONGODB_URI);
 
 
 
-app.get("/scrape", (req, res) => {
-    res.send("Hello World");
+app.get("/", (req, res) => {
     axios.get("https://www.nytimes.com/section/science").then(response => {
         const $ = cheerio.load(response.data);
 
@@ -53,7 +52,8 @@ app.get("/scrape", (req, res) => {
                 .then(dbArticle => console.log(dbArticle))
                 .catch(err => console.log(err));
         });
-    })
+    });
+    res.redirect("/articles");
 
 
 });
