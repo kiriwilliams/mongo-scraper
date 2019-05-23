@@ -45,5 +45,5 @@ $(document).on("click", ".saveNote", function() {
     });
 
   // Also, remove the values entered in the input and textarea for note entry
-  $("#"+noteID).val("");
+  $("#"+noteId).val("");
 });
