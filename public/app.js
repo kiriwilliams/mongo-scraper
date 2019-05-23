@@ -4,11 +4,13 @@ console.log("running app.js");
 
 
 
-// Whenever someone clicks a p tag
-$(document).on("click", "article", function() {
- 
-  // Save the id from the p tag
-  var thisId = $(this).attr("data-id");
+// Whenever someone clicks a button
+$(document).on("click", ".modalToggler", function() {
+  // Save the id from the button
+  let thisId = $(this).attr("data-id");
+  let modalId = $(this).attr("data-target");
+  $(modalId).modal("show");
+
   console.log(thisId);
   // Now make an ajax call for the Article
   $.ajax({
@@ -16,6 +18,7 @@ $(document).on("click", "article", function() {
     url: "/articles/" + thisId
   })
     .then(data => {
+
       console.log(data);
 
     })
