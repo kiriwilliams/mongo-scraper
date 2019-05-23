@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
             result.title = $(element).children().text();
             result.summary = $(element).next().text();
             result.href = "https://www.nytimes.com/" + $(element).children().attr("href");
-            result.imgSrc = "'" + $(element).parent().prev().find("img").attr("src") + "'";
+            result.imgSrc = $(element).parent().prev().find("img").attr("src");
             console.log(result);
             db.Article.create(result)
                 .then(dbArticle => console.log(dbArticle))
@@ -82,7 +82,7 @@ app.post("/articles/:id", (req, res) => {
     console.log("here");
     console.log(req.body);
     db.Note.create(req.body)
-        .then( dbNote =>  db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true })
+        .then( dbNote =>  db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: {notes: dbNote._id} }, { new: true })
         )
         .then(dbArticle => res.json(dbArticle))
         .catch(err => res.json(err));
