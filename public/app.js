@@ -9,6 +9,7 @@ $(document).on("click", ".modalToggler", function() {
   // Save the id from the button
   let thisId = $(this).attr("data-id");
   let modalId = $(this).attr("data-target");
+  let commentsId = thisId+"Comments";
   $(modalId).modal("show");
 
   console.log(thisId);
@@ -20,6 +21,7 @@ $(document).on("click", ".modalToggler", function() {
     .then(data => {
 
       console.log(data);
+      $("#"+commentsId).append(data.notes);
 
     })
 });
