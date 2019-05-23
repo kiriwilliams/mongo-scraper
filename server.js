@@ -35,7 +35,6 @@ mongoose.connect(MONGODB_URI);
 
 
 
-
 app.get("/", (req, res) => {
     axios.get("https://www.nytimes.com/section/science").then(response => {
         const $ = cheerio.load(response.data);
