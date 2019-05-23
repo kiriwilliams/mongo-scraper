@@ -41,13 +41,13 @@ app.get("/", (req, res) => {
         const $ = cheerio.load(response.data);
 
 
-        $("h2", "article").each((i, element) => {
+        $("h2").each((i, element) => {
             const result = {};
             result.title = $(element).children().text();
             result.summary = $(element).next().text();
             result.href = "https://www.nytimes.com/" + $(element).children().attr("href");
-            result.imgSrc = $(element).parent().prev().find("img").attr("src");
-
+            result.imgSrc = "'" + $(element).parent().prev().find("img").attr("src") + "'";
+            console.log(result);
             db.Article.create(result)
                 .then(dbArticle => console.log(dbArticle))
                 .catch(err => console.log(err));
@@ -68,6 +68,14 @@ app.get("/articles", (req, res) => {
             })
             .catch(err => res.json(err));
 });
+
+app.get("/articles/:id", (req, res) =>{
+    db.Article.findOne({ _id: req.params.id })
+        .populate("note")
+        .then( dbArticle => res.json(dbArticle))
+        .catch( err => res.json(err));
+});
+
 // Start the server
 app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");
