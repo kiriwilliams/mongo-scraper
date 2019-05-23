@@ -1,5 +1,50 @@
-<article data-id={{_id}} style="background-image: url({{imgSrc}})">
-    <img src={{imgSrc}} alt={{title}}>
-<a href={{href}}><h3>{{title}}</h3></a>
-{{summary}}
+<article data-id={{_id}} style="position:relative; width:50%; float: left">
+    <img src={{imgSrc}} class="img-fluid" style="z-index: -1">
+    <div style="position: absolute; top:0; z-index: 1">
+        <a href={{href}}>
+            <h3 style="display: inline">{{title}}</h3>
+        </a>
+        {{summary}}
+        <br>
+        <button type="button" class="btn btn-primary" data-id={{_id}}data-toggle="modal"
+            data-target="#{{_id}}Modal">Join the discussion</a>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="{{_id}}Modal" tabindex="-1" role="dialog" aria-labelledby="{{_id}}ModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="{{_id}}ModalLabel">{{title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{imgSrc}}" class="img-fluid">
+                    <small class="text-muted">{{summary}}</small>
+                    <hr>
+
+                    <hr>
+                                        <form action="">
+                        <div class="form-group">
+                            <h6> <label for="noteInput">Leave a comment</label></h6>
+
+                            <textarea id="noteInput" class="form-control" placeholder="Message"
+                                aria-label="Message input" aria-describedby="noteInput"></textarea>
+
+                        </div>
+                        
+                        <button type="button" class="btn btn-success float-right">Post</button>
+                    <button type="button" class="btn btn-outline-secondary float-right mr-2" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+                {{!-- <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div> --}}
+            </div>
+        </div>
+    </div>
 </article>
