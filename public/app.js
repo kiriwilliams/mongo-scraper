@@ -25,10 +25,9 @@ $(document).on("click", ".modalToggler", function() {
 });
 
 // When you click the savenote button
-$(document).on("click", "#savenote", function() {
+$(document).on("click", "#saveNote", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
-  console.log(this);
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
