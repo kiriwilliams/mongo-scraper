@@ -21,10 +21,20 @@ $(document).on("click", ".modalToggler", function() {
     .then(data => {
 
       console.log(data);
-      $("#"+commentsId).append(data.notes);
-
+      for(let i = 0; i < data.notes.length; i++){
+        $("#"+commentsId).append(newNote(data.notes[i]));
+      }
     })
 });
+
+function newNote(string){
+  const card = $("<div>").addClass("card");
+  const cardbody = $("<div>").addClass("card-body");
+  const button = $("<button>").addClass("close float-right");
+  cardbody.append(string).append(button);
+  card.append(cardbody);
+  return card;
+}
 
 // When you click the savenote button
 $(document).on("click", ".saveNote", function() {
