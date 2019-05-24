@@ -12,7 +12,7 @@ $(document).on("click", ".modalToggler", function() {
   let commentsId = thisId+"Comments";
   $(modalId).modal("show");
 
-  console.log(thisId);
+
   // Now make an ajax call for the Article
   $.ajax({
     method: "GET",
@@ -22,13 +22,15 @@ $(document).on("click", ".modalToggler", function() {
 
 
       const latestNote = data.notes.length - 1;
+      console.log("get id "+data.notes[latestNote]._id);
       $("#"+commentsId).append(newNote(data.notes[latestNote].note, data.notes[latestNote]._id));
     })
 });
 
 //make a new note card
 function newNote(string, id){
-  const card = $("<div>").addClass("card");
+  console.log("newNote id: "+id);
+  const card = $("<div>").addClass("card").attr("data-card",id);
   const cardbody = $("<div>").addClass("card-body");
   const button = $("<button>").addClass("close delete float-right ").attr("data-id",id).append("x");
   cardbody.append(string).append(button);
@@ -41,7 +43,7 @@ $(document).on("click", ".saveNote", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
   var noteId = thisId+"noteInput";
-  console.log($("#"+noteId).val().trim());
+
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
@@ -63,5 +65,8 @@ $(document).on("click", ".saveNote", function() {
 //when you delete a note
 $(document).on("click", ".delete", function(){
   const thisId = $(this).attr("data-id");
+  // console.log(thisId);
+  $("[data-card='"+thisId+"']").remove();
+
 
 })
