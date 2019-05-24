@@ -1,13 +1,19 @@
 <article data-id={{_id}}>
     <img src={{imgSrc}} class="img-fluid">
-    <div class="newsClip">
-        <a href={{href}}>
-            <h3 style="display: inline">{{title}}</h3>
-        </a>
-        <p>{{summary}}</p>
-        <br>
-        <button type="button" class="btn btn-primary modalToggler" data-id={{_id}} data-toggle="modal"
-            data-target="#{{_id}}Modal">Join the discussion</a>
+    <div class="newsClipContainer">
+        <div class="newsClip">
+            <a href={{href}}>
+                <h3 class="block">{{title}}</h3>
+            </a>
+            <span class="hidey">
+                <p>{{summary}}</p>
+                <br>
+                <button type="button" class="btn btn-primary modalToggler" data-id={{_id}} data-toggle="modal"
+                    data-target="#{{_id}}Modal">Join the discussion</a>
+            </span>
+
+
+        </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="{{_id}}Modal" tabindex="-1" role="dialog" aria-labelledby="{{_id}}ModalLabel"
