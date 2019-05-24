@@ -20,17 +20,17 @@ $(document).on("click", ".modalToggler", function() {
   })
     .then(data => {
 
-      console.log(data);
-      for(let i = 0; i < data.notes.length; i++){
-        $("#"+commentsId).append(newNote(data.notes[i]));
-      }
+
+      const latestNote = data.notes.length - 1;
+      $("#"+commentsId).append(newNote(data.notes[latestNote].note, data.notes[latestNote]._id));
     })
 });
 
-function newNote(string){
+//make a new note card
+function newNote(string, id){
   const card = $("<div>").addClass("card");
   const cardbody = $("<div>").addClass("card-body");
-  const button = $("<button>").addClass("close float-right");
+  const button = $("<button>").addClass("close delete float-right ").attr("data-id",id).append("x");
   cardbody.append(string).append(button);
   card.append(cardbody);
   return card;
@@ -59,3 +59,9 @@ $(document).on("click", ".saveNote", function() {
   // Also, remove the values entered in the input and textarea for note entry
   $("#"+noteId).val("");
 });
+
+//when you delete a note
+$(document).on("click", ".delete", function(){
+  const thisId = $(this).attr("data-id");
+
+})
