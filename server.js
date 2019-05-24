@@ -81,7 +81,7 @@ app.post("/articles/:id", (req, res) => {
     console.log("here");
     console.log(req.body);
     db.Note.create(req.body)
-        .then( dbNote =>  db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: {notes: dbNote.note} }, { new: true })
+        .then( dbNote =>  db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: {notes: dbNote._id} }, { new: true })
         )
         .then(dbArticle => res.json(dbArticle))
         .catch(err => res.json(err));
