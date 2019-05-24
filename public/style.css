@@ -16,6 +16,7 @@ article img{
     width: 100%;
     top: 0;
     z-index: 1;
+    overflow: hidden;
 }
 .newsClip{
     width: 100%;
@@ -36,5 +37,8 @@ article img{
     display: block;
 }
 .newsClipContainer:hover .newsClip{
+    
     margin-top: 0;
+    -webkit-transition: margin-top 0.2s; /* Safari */
+  transition: margin-top 0.2s;
 }
